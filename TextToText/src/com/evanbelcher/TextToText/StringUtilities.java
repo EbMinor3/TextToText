@@ -2,7 +2,6 @@ package com.evanbelcher.TextToText;
 
 import java.awt.FontMetrics;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,7 +9,7 @@ import java.util.List;
  * 
  * @author Jim Menard, <a href="mailto:jimm@io.com">jimm@io.com</a>
  */
-public class StringUtilities {
+class StringUtilities {
 	
 	/**
 	 * Returns an array of strings, one for each line in the string after it has
@@ -28,14 +27,14 @@ public class StringUtilities {
 	 *            the max line width, in points
 	 * @return a non-empty list of strings
 	 */
-	public static List wrap(String str, FontMetrics fm, int maxWidth) {
-		List lines = splitIntoLines(str);
+	static List<String> wrap(String str, FontMetrics fm, int maxWidth) {
+		List<String> lines = splitIntoLines(str);
 		if (lines.size() == 0)
 			return lines;
 			
-		ArrayList strings = new ArrayList();
-		for (Iterator iter = lines.iterator(); iter.hasNext();)
-			wrapLineInto((String) iter.next(), strings, fm, maxWidth);
+		ArrayList<String> strings = new ArrayList<>();
+		for (Object line : lines)
+			wrapLineInto((String) line, strings, fm, maxWidth);
 		return strings;
 	}
 	
@@ -52,7 +51,7 @@ public class StringUtilities {
 	 * @param maxWidth
 	 *            maximum width of the line(s)
 	 */
-	public static void wrapLineInto(String line, List list, FontMetrics fm, int maxWidth) {
+	private static void wrapLineInto(String line, List<String> list, FontMetrics fm, int maxWidth) {
 		int len = line.length();
 		int width;
 		while (len > 0 && (width = fm.stringWidth(line)) > maxWidth) {
@@ -94,7 +93,7 @@ public class StringUtilities {
 	 * @param start
 	 *            where to star looking
 	 */
-	public static int findBreakBefore(String line, int start) {
+	private static int findBreakBefore(String line, int start) {
 		for (int i = start; i >= 0; --i) {
 			char c = line.charAt(i);
 			if (Character.isWhitespace(c) || c == '-')
@@ -113,7 +112,7 @@ public class StringUtilities {
 	 * @param start
 	 *            where to star looking
 	 */
-	public static int findBreakAfter(String line, int start) {
+	private static int findBreakAfter(String line, int start) {
 		int len = line.length();
 		for (int i = start; i < len; ++i) {
 			char c = line.charAt(i);
@@ -134,8 +133,8 @@ public class StringUtilities {
 	 *            the string to split
 	 * @return a non-empty list of strings
 	 */
-	public static List splitIntoLines(String str) {
-		ArrayList strings = new ArrayList();
+	static List<String> splitIntoLines(String str) {
+		ArrayList<String> strings = new ArrayList<>();
 		
 		int len = str.length();
 		if (len == 0) {

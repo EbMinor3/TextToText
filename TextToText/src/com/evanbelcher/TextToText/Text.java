@@ -15,17 +15,17 @@ public class Text {
 	}
 
 	
-	public Date getDatetime() {
+	Date getDatetime() {
 		return datetime;
 	}
 
 	
-	public String getSender() {
+	String getSender() {
 		return sender;
 	}
 
 	
-	public ArrayList<String> getMessage() {
+	ArrayList<String> getMessage() {
 		return message;
 	}
 	
